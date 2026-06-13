@@ -1,0 +1,99 @@
+The Game — Full Overview
+
+What It Is
+A mobile tower defense roguelite where your tower is your character. You don't move, you don't aim — you build. Waves of enemies pour in from all sides, your tower auto-attacks, and your entire skill expression happens through drafting upgrades and managing your meta progression. It's the strategic depth of Tower Survivors dressed in Archero's addictive progression skeleton, designed from the ground up for mobile.
+Working title: Tower's Last Stand (or whatever you land on — the concept is clear enough to name later).
+
+A Single Run — What Actually Happens
+You pick a tower from your collection and enter a chapter. The arena is a fixed screen — enemies stream in from all edges toward your tower in the center. You watch, you draft, you adapt.
+The run lasts about 10 minutes. Roughly 20 waves, each 20–30 seconds of combat. Between every wave you get a brief pause — 3 random upgrade cards appear, you pick one. No gold, no shop, pure draft. Every few level-ups (earned by killing enemies) you get another 3-card draft. Two streams of choices, constant forward momentum.
+The run ends one of three ways: your tower's HP hits zero (defeat), you clear all 20 waves (victory), or you reach the chapter boss and kill it (bonus victory with extra material drops). On defeat you restart the chapter from wave 1 — no mid-run saves. Archero logic: try again, build better.
+
+The Tower (Your Character)
+You own a collection of towers, each one mechanically distinct. A tower has:
+Base attack — what it fires automatically without any upgrades. Some towers fire single targeted shots, some spray in fixed directions, some pulse AoE around themselves.
+Stat profile — each tower trades off HP, damage, fire rate, and range differently. A glass cannon tower melts enemies but needs survivability upgrades to survive. A tank tower can soak hits but needs damage upgrades to clear waves in time.
+Unique passive — a baked-in mechanic that defines the tower's identity and shapes how you draft. Examples:
+
+Ironclad Tower: every 5th shot fires in all 8 directions simultaneously. Makes AoE and chain spells feel enormous.
+Phantom Tower: has no base attack — relies entirely on drafted spells. Wild ceiling, punishing if your drafts are bad.
+Ember Tower: base attack applies Burn (1 sec DoT). Fire-tag synergies trigger on Burn stacks, not just direct hits.
+Tide Tower: base attack bounces between 2 enemies. Chain and Piercing synergies become twice as effective.
+Sentinel Tower: has 50% more range than any other tower. Long-range spell types (Siege, Piercing) are its natural fit.
+
+Tower Stars (Meta Upgrade) — each tower goes from Star 1 to Star 5 using materials. Star 3 unlocks an enhanced version of the passive. Star 5 unlocks a second passive. A Star 5 Ember Tower doesn't just burn faster — at Star 3 Burn spreads to adjacent enemies on death, at Star 5 every 10th shot detonates all active Burn stacks for burst damage. Stars are the long-term grind goal.
+
+The Spell System
+25 spells at launch, organized into 5 damage type families. The type families exist so synergy tags make sense — you're building toward a theme, not just picking the highest number.
+The 5 families:
+Normal — reliable single-target, high consistency. Suits tanks and sustained DPS builds.
+
+Spells: Throwing Axes, Hammer Strike, Ricochet Shot, Armor Shred, Double Strike.
+Piercing — cuts through multiple enemies in a line. Suits runners and wave-clear builds.
+
+Spells: Arrow Volley, Needle Storm, Spear Throw, Long Shot, Penetrating Bolt.
+Magic — AoE focused, lower per-hit damage but hits groups. Suits AoE and zone-control builds.
+
+Spells: Fireball, Chain Lightning, Blizzard, Arcane Nova, Mana Shield (reflect).
+Siege — slow, massive single hits. Wrecks tanks and bosses. Suits heavy-armor enemy chapters.
+
+Spells: Cannon Shot, Land Mines, Bunker Buster, Tremor, Shockwave.
+Chaos — ignores all armor, unpredictable effects. Suits late-game wild builds.
+
+Spells: Demonfire, Black Arrow, Cursed Ground, Soul Rip, Entropy Bolt.
+Each spell also has a Rank (meta upgrade, 1–5) upgraded with materials between runs. Rank doesn't just increase numbers — each rank tier adds a behavior. Arrow Volley at Rank 1 fires 3 arrows. At Rank 3 arrows pierce one enemy. At Rank 5 arrows that pierce leave a 1-second slow field. This is why players grind: a maxed favorite spell plays differently, not just harder.
+
+Synergy Tags
+Every upgrade card — spells and stat bonuses alike — has one or more tags. As you accumulate matching tags during a run, thresholds unlock bonuses automatically. No UI management needed: tags count themselves in the background and the bonuses just pop.
+Example thresholds:
+[Fire] ×3 → all Fire-tagged spells deal +25% damage.
+
+[Fire] ×5 → enemies killed by Fire spells leave a 1-second burn patch on the ground.
+[Chain] ×3 → chain effects jump one additional time.
+
+[Chain] ×5 → chain jumps now also apply the primary spell's damage type debuff.
+[Heavy] ×3 → Siege-type attacks have +40% damage against high-HP enemies (above 60% HP).
+
+[Heavy] ×5 → every Siege attack briefly stuns the target (0.3 seconds).
+[Gold] ×2 → passive gold income between waves increased by 30%.
+
+[Gold] ×4 → bonus materials at end of run based on gold earned.
+[Armor] ×3 → tower takes 15% less damage from all sources.
+
+[Armor] ×5 → tower regenerates 1% max HP every 5 seconds.
+The synergy system is the puzzle layer. You won't hit every threshold every run — you're constantly deciding whether to chase a tag or grab a strong off-tag spell because it's simply too good to pass up. That tension is where replayability lives.
+
+Chapters & World Map
+The world map is a linear set of chapters, each with 10 stages (e.g. 1-1 through 1-10). Each chapter has a theme that introduces a new enemy type and a passive environmental modifier:
+
+Chapter 1 (Plains): tutorial chapter, basic enemy types, no modifier.
+Chapter 2 (Frost Wastes): introduces Brutes. Modifier: enemies have +20% HP but move 15% slower.
+Chapter 3 (Volcanic Ridge): introduces Flyers. Modifier: ground randomly has lava patches that deal lingering Magic damage to ground enemies (helps the player).
+Chapter 4 (Dark Fortress): introduces armored elites. Modifier: enemy armor type randomizes each wave — you can't predict what to counter.
+And so on — each chapter adds complexity.
+
+Every 10th stage is a boss. Boss enemies are massive, have multiple HP phases, and have a mechanic that punishes a specific playstyle (the Frost boss heals when hit by Magic damage, pushing players toward Piercing or Siege).
+Completing a chapter for the first time drops the most materials. Replaying drops less, but you need to replay to grind stars and ranks. This is the Archero loop: new chapters pull you forward, old chapters keep you busy.
+
+The Meta Layer — Between Runs
+Tower Garage: your collection of towers. Shows current star level, what materials you need to upgrade, and the passive unlocks at each star. You set which tower you're bringing into a run here.
+Spell Codex: all 25 spells with their current rank and what the next rank unlocks. Spend materials to rank up. You can also see which spells appear in which chapter's drop pool.
+Materials: two types — Chapter Materials (specific to each chapter's theme, used for towers and spells tied to that theme) and Universal Materials (rare, drop from bosses, used for anything). Simple enough to understand fast, deep enough to create meaningful choices about where to spend.
+Daily Missions: three simple tasks per day (complete a chapter, get a [Fire]×5 synergy, kill 500 enemies). Reward materials and a small gold bonus. Not mandatory, but worth doing.
+
+Monetization
+Clean and fair. Nothing behind a paywall gives a stat advantage that can't be earned through play.
+Energy: 5 runs per day base, regenerates over time. Extra energy purchasable. Standard mobile gate.
+Tower Packs: new towers are primarily unlocked through chapter completion and material milestones. Some can be bought directly — but they're not stronger than earnable towers, just different playstyles available sooner.
+Cosmetics: tower skins that change the projectile visuals, impact effects, and tower idle animation. Pure aesthetic. The best-looking cosmetics are the main premium draw.
+Battle Pass: seasonal, 8 weeks. Earns bonus materials and a cosmetic tower skin at tier 50. Purely accelerates what you'd earn anyway.
+Hard cap: spell ranks and tower stars are gated by chapter progress, not just materials. A day-one player who spends money can't have a Star 5 tower until they've actually cleared the chapters that drop those materials. Keeps early game fair and prevents power creep from killing new player retention.
+
+What Playing It Actually Feels Like
+You tap Start, the arena fills your screen. Your tower sits dead center. Enemies stream in from all four edges — a mix of fast runners and slow tanks. Your tower auto-fires, enemies die, the wave clears in 20 seconds.
+Three cards slide up. One is a Fireball (Magic, [Fire] tag), one is Ricochet Shot (Normal, [Chain] tag), one is an HP boost ([Armor] tag). You have no [Fire] spells yet, but Fireball alone is strong. You pick it.
+Wave 2 hits harder. Level up mid-wave, another 3 cards: Chain Lightning ([Chain][Fire] dual tag — interesting), Attack Speed ([Utility]), or Arrow Volley ([Piercing]). Chain Lightning has both tags and would feed a future synergy in either direction. You take it.
+By wave 8 you've accidentally built a [Fire]×3 stack. The threshold pops — all Fire spells now deal +25% damage. Your Fireball and Chain Lightning both spike. The run that felt mediocre suddenly accelerates.
+Wave 15 is a mini-boss. He's tanky but your Siege draft from wave 12 handles him. Two more waves and the chapter boss appears — a massive armored creature that splits into three smaller versions at 50% HP. Your AoE handles the split. Victory.
+Materials drop. You open the Tower Garage. Enough to bring Ember Tower to Star 2. Next run you want to see what [Fire]×5 actually does.
+That's the loop.You said: 1 more think worth noting archero feels like it uses 3d models but idk if they are or not?
