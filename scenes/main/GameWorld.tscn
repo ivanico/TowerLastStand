@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://co7mwlq4v4bjl" path="res://scenes/main/GameWorld.gd" id="1_gworld"]
 [ext_resource type="PackedScene" uid="uid://onacul5i5rl5" path="res://scenes/tower/TowerIronclad.tscn" id="2_gworld"]
-[ext_resource type="PackedScene" path="res://scenes/ui/HUD.tscn" id="3_gworld"]
+[ext_resource type="PackedScene" uid="uid://c2rivtopi6we" path="res://scenes/ui/HUD.tscn" id="3_gworld"]
 
 [node name="GameWorld" type="Node2D"]
 script = ExtResource("1_gworld")

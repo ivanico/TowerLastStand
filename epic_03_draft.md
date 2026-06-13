@@ -64,7 +64,6 @@ Create a `StatUpgradeData.gd` folder sibling called `res://resources/upgrades/`.
 - [ ] `upgrade_range.tres`: id=`upgrade_range`, name="Eagle Eye", range_bonus=80.0, tags=[UTILITY], rarity=COMMON, stackable=true, stack_max=3.
 - [ ] `upgrade_armor.tres`: id=`upgrade_armor`, name="Plate Mail", armor_bonus=15, tags=[ARMOR], rarity=RARE, stackable=true, stack_max=3.
 - [ ] `upgrade_xp.tres`: id=`upgrade_xp`, name="Scholar", xp_multiplier=1.25, tags=[UTILITY, GOLD], rarity=COMMON, stackable=false.
-- [ ] `upgrade_reroll.tres`: id=`upgrade_reroll`, name="Second Chance", is_reroll=true, tags=[UTILITY], rarity=EPIC, stackable=false.
 
 ---
 

@@ -8,6 +8,7 @@ const _ENEMY_GRUNT_SCENE := preload("res://scenes/enemies/EnemyGrunt.tscn")
 func _ready() -> void:
 	WaveManager._enemy_container = $EnemyContainer
 	WaveManager._tower_node = $TowerNode
+	GameState.tower_node = $TowerNode
 	$TowerNode._projectile_container = $ProjectileContainer
 	$TowerNode._zone_container = $ZoneContainer
 	ObjectPool.preload_pool(_PROJECTILE_SCENE, 30)
@@ -35,8 +36,7 @@ func _on_wave_cleared(wave_number: int) -> void:
 	if wave_number >= Constants.TOTAL_WAVES:
 		return
 	GameState.wave_number += 1
-	await get_tree().create_timer(1.0).timeout
-	WaveManager.start_wave(GameState.wave_number)
+	DraftManager.open_draft("wave_clear")
 
 
 func _on_phase_changed(_phase: int) -> void:

@@ -33,6 +33,9 @@ var total_kills: int
 var waves_cleared: int
 var damage_dealt: float
 
+# Scene reference — set by GameWorld._ready(), not cleared on reset
+var tower_node: Node
+
 
 func _ready() -> void:
 	reset()
@@ -66,11 +69,28 @@ func gain_xp(amount: int) -> void:
 		run_level += 1
 		run_xp_to_next = Constants.XP_PER_LEVEL_BASE * run_level
 		EventBus.level_up.emit(run_level)
-		DraftManager.open_draft()
+		DraftManager.open_draft("level_up")
 
 
-func apply_card(_card: Resource) -> void:
-	pass  # Full implementation in Epic 03
+func apply_card(card: Resource) -> void:
+	if card is SpellData:
+		if active_spells.size() < Constants.MAX_SPELL_SLOTS:
+			active_spells.append(card)
+			for tag in card.tags:
+				add_tag(tag)
+			if tower_node != null:
+				tower_node.add_spell(card)
+	elif card is StatUpgradeData:
+		tower_max_hp += card.hp_bonus
+		tower_hp = min(tower_hp + card.hp_bonus, tower_max_hp)
+		tower_regen_per_sec += card.regen_bonus
+		tower_damage_multiplier *= card.damage_multiplier
+		tower_fire_rate_multiplier *= card.fire_rate_multiplier
+		tower_range_bonus += card.range_bonus
+		tower_armor += card.armor_bonus
+		for tag in card.tags:
+			add_tag(tag)
+		hp_changed.emit(tower_hp, tower_max_hp)
 
 
 func add_tag(tag: int) -> void:
