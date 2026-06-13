@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://ci4vu4utkcq7y"]
+
+[ext_resource type="Script" path="res://scenes/enemies/EnemyBase.gd" id="1_ebase"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_001"]
+radius = 20.0
+height = 60.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_001"]
+radius = 35.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_002"]
+radius = 55.0
+
+[node name="EnemyBase" type="CharacterBody2D"]
+groups = ["enemies"]
+collision_layer = 1
+collision_mask = 1
+motion_mode = 1
+script = ExtResource("1_ebase")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_001")
+
+[node name="HitArea" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea"]
+shape = SubResource("CircleShape2D_001")
+
+[node name="AttackZone" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackZone"]
+shape = SubResource("CircleShape2D_002")
+
+[node name="HPBar" type="ProgressBar" parent="."]
+visible = false
+offset_left = -30.0
+offset_top = -45.0
+offset_right = 30.0
+offset_bottom = -37.0

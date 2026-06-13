@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="SpellData" load_steps=2 format=3]
+
+[ext_resource type="Script" uid="uid://mn3kdaudvj0a" path="res://resources/spells/SpellData.gd" id="1_aaaaa"]
+
+[resource]
+script = ExtResource("1_aaaaa")
+spell_id = "soul_rip"
+spell_name = "Soul Rip"
+description = ""
+rarity = 2
+spell_category = 0
+damage_type = 4
+tags = Array[int]([8, 5])
+damage = 200.0
+cooldown = 4.0
+range = 420.0
+aoe_radius = 0.0
+pierce_count = 0
+chain_count = 0
+is_stackable = false
+stack_max = 1

@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="SpellData" load_steps=2 format=3]
+
+[ext_resource type="Script" uid="uid://mn3kdaudvj0a" path="res://resources/spells/SpellData.gd" id="1_aaaaa"]
+
+[resource]
+script = ExtResource("1_aaaaa")
+spell_id = "entropy_bolt"
+spell_name = "Entropy Bolt"
+description = ""
+rarity = 1
+spell_category = 0
+damage_type = 4
+tags = Array[int]([8, 1])
+damage = 80.0
+cooldown = 1.0
+range = 440.0
+aoe_radius = 0.0
+pierce_count = 0
+chain_count = 0
+is_stackable = false
+stack_max = 1

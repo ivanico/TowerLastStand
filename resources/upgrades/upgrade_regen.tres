@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="StatUpgradeData" load_steps=2 format=3]
+
+[ext_resource type="Script" uid="uid://dl8qg2gimn00o" path="res://resources/spells/StatUpgradeData.gd" id="1_aaaaa"]
+
+[resource]
+script = ExtResource("1_aaaaa")
+upgrade_id = "upgrade_regen"
+upgrade_name = "Regeneration"
+description = "+8 HP per second."
+rarity = 1
+tags = Array[int]([4])
+hp_bonus = 0
+regen_bonus = 8.0
+damage_multiplier = 1.0
+fire_rate_multiplier = 1.0
+range_bonus = 0.0
+armor_bonus = 0
+xp_multiplier = 1.0
+is_stackable = true
+stack_max = 3

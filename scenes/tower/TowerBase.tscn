@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://du1s0ojk0m761"]
+
+[ext_resource type="Script" path="res://scenes/tower/TowerBase.gd" id="1_tbase"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_001"]
+radius = 50.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_002"]
+radius = 400.0
+
+[node name="TowerBase" type="Area2D"]
+collision_layer = 4
+groups = ["tower"]
+script = ExtResource("1_tbase")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_001")
+
+[node name="AttackRangeArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 1
+monitoring = true
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRangeArea"]
+shape = SubResource("CircleShape2D_002")
+
+[node name="RangeIndicator" type="Node2D" parent="."]
+visible = false
+
+[node name="RegenTimer" type="Timer" parent="."]
+wait_time = 1.0
+autostart = false

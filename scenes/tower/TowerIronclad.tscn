@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://onacul5i5rl5"]
+
+[ext_resource type="PackedScene" path="res://scenes/tower/TowerBase.tscn" id="1_tiron"]
+[ext_resource type="Script" path="res://scenes/tower/TowerIronclad.gd" id="2_tiron"]
+
+[node name="TowerIronclad" instance=ExtResource("1_tiron")]
+script = ExtResource("2_tiron")

@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="SpellData" load_steps=2 format=3]
+
+[ext_resource type="Script" uid="uid://mn3kdaudvj0a" path="res://resources/spells/SpellData.gd" id="1_aaaaa"]
+
+[resource]
+script = ExtResource("1_aaaaa")
+spell_id = "arcane_nova"
+spell_name = "Arcane Nova"
+description = ""
+rarity = 2
+spell_category = 1
+damage_type = 2
+tags = Array[int]([5, 0])
+damage = 200.0
+cooldown = 5.0
+range = 300.0
+aoe_radius = 200.0
+pierce_count = 0
+chain_count = 0
+is_stackable = false
+stack_max = 1

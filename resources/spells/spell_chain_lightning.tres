@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="SpellData" load_steps=2 format=3]
+
+[ext_resource type="Script" uid="uid://mn3kdaudvj0a" path="res://resources/spells/SpellData.gd" id="1_aaaaa"]
+
+[resource]
+script = ExtResource("1_aaaaa")
+spell_id = "chain_lightning"
+spell_name = "Chain Lightning"
+description = ""
+rarity = 1
+spell_category = 0
+damage_type = 2
+tags = Array[int]([0, 1])
+damage = 70.0
+cooldown = 1.2
+range = 400.0
+aoe_radius = 0.0
+pierce_count = 0
+chain_count = 3
+is_stackable = false
+stack_max = 1

@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="SpellData" load_steps=2 format=3]
+
+[ext_resource type="Script" uid="uid://mn3kdaudvj0a" path="res://resources/spells/SpellData.gd" id="1_aaaaa"]
+
+[resource]
+script = ExtResource("1_aaaaa")
+spell_id = "shockwave"
+spell_name = "Shockwave"
+description = ""
+rarity = 1
+spell_category = 0
+damage_type = 3
+tags = Array[int]([3, 2])
+damage = 130.0
+cooldown = 3.0
+range = 500.0
+aoe_radius = 0.0
+pierce_count = 10
+chain_count = 0
+is_stackable = false
+stack_max = 1
