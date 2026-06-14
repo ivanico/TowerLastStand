@@ -4,13 +4,13 @@ const _PROJECTILE_SCENE      := preload("res://scenes/spells/ProjectileBase.tscn
 const _AOE_ZONE_SCENE        := preload("res://scenes/spells/AoEZone.tscn")
 const _PERSISTENT_ZONE_SCENE := preload("res://scenes/spells/PersistentZone.tscn")
 const _LAND_MINE_SCENE       := preload("res://scenes/spells/LandMine.tscn")
-const _ENEMY_GRUNT_SCENE     := preload("res://scenes/enemies/EnemyGrunt.tscn")
 const _DRAFT_UI_SCENE        := preload("res://scenes/ui/DraftUI.tscn")
+const _SYNERGY_BANNER_SCENE  := preload("res://scenes/ui/SynergyBanner.tscn")
+const _CHAPTER_01            := preload("res://resources/waves/chapter_01.tres")
 
 
 func _ready() -> void:
-	WaveManager._enemy_container = $EnemyContainer
-	WaveManager._tower_node = $TowerNode
+	WaveManager.setup($EnemyContainer, $TowerNode, _CHAPTER_01 as ChapterConfig)
 	GameState.tower_node = $TowerNode
 	$TowerNode._projectile_container = $ProjectileContainer
 	$TowerNode._zone_container = $ZoneContainer
@@ -19,7 +19,6 @@ func _ready() -> void:
 	ObjectPool.preload_pool(_AOE_ZONE_SCENE, 10)
 	ObjectPool.preload_pool(_PERSISTENT_ZONE_SCENE, 10)
 	ObjectPool.preload_pool(_LAND_MINE_SCENE, 10)
-	ObjectPool.preload_pool(_ENEMY_GRUNT_SCENE, 30)
 	var test_spell := SpellData.new()
 	test_spell.spell_id       = "test_bolt"
 	test_spell.spell_name     = "Test Bolt"
@@ -31,12 +30,15 @@ func _ready() -> void:
 	test_spell.pierce_count   = 0
 	$TowerNode.add_spell(test_spell)
 
+	add_child(_SYNERGY_BANNER_SCENE.instantiate())
 	add_child(_DRAFT_UI_SCENE.instantiate())
 	GameState.start_run(null)
 	WaveManager.start_wave(GameState.wave_number)
 	EventBus.wave_cleared.connect(_on_wave_cleared)
 	EventBus.phase_changed.connect(_on_phase_changed)
 	EventBus.tower_died.connect(_on_tower_died)
+	EventBus.level_up.connect(_on_level_up)
+	EventBus.boss_died.connect(_on_boss_died)
 
 
 func _on_wave_cleared(wave_number: int) -> void:
@@ -46,38 +48,28 @@ func _on_wave_cleared(wave_number: int) -> void:
 	DraftManager.open_draft("wave_clear")
 
 
-func _on_phase_changed(_phase: int) -> void:
-	pass
+func _on_phase_changed(phase: int) -> void:
+	if phase == Constants.GamePhase.DRAFT and DraftManager._draft_trigger == "wave_clear":
+		WaveManager.stop_wave()
+
+
+func _on_level_up(_level: int) -> void:
+	DraftManager.open_draft("level_up")
 
 
 func _on_tower_died() -> void:
-	WaveManager.clear_all_enemies()
+	WaveManager.stop_wave()
+	GameState.end_run(false)
+	await get_tree().create_timer(0.5).timeout
+	get_tree().change_scene_to_file("res://scenes/main/DefeatScreen.tscn")
 
-	var canvas := CanvasLayer.new()
-	canvas.process_mode = Node.PROCESS_MODE_WHEN_PAUSED
-	add_child(canvas)
 
-	var bg := ColorRect.new()
-	bg.color = Color(0.0, 0.0, 0.0, 0.65)
-	bg.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	canvas.add_child(bg)
+func _on_boss_died() -> void:
+	_trigger_victory()
 
-	var label := Label.new()
-	label.text = "GAME OVER\nTap to retry"
-	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	label.add_theme_font_size_override("font_size", 72)
-	label.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	canvas.add_child(label)
 
-	var btn := Button.new()
-	btn.flat = true
-	btn.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	btn.pressed.connect(func() -> void:
-		get_tree().paused = false
-		GameState.reset()
-		get_tree().reload_current_scene()
-	)
-	canvas.add_child(btn)
-
-	get_tree().paused = true
+func _trigger_victory() -> void:
+	WaveManager.stop_wave()
+	GameState.end_run(true)
+	await get_tree().create_timer(1.0).timeout
+	get_tree().change_scene_to_file("res://scenes/main/VictoryScreen.tscn")

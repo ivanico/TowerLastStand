@@ -36,7 +36,19 @@ static var DAMAGE_TABLE: Dictionary = {
 
 static func calculate_damage(base: float, dtype: int, atype: int) -> float:
 	var multiplier: float = DAMAGE_TABLE[dtype][atype]
-	return base * multiplier
+	var damage := base * multiplier
+
+	match dtype:
+		Constants.DamageType.MAGIC:
+			damage *= GameState.fire_damage_bonus
+		Constants.DamageType.SIEGE:
+			damage *= GameState.siege_vs_high_hp_bonus
+		Constants.DamageType.CHAOS:
+			if GameState.chaos_extra_armor_ignore > 0.0:
+				damage += base * GameState.chaos_extra_armor_ignore
+
+	damage *= GameState.tower_damage_multiplier
+	return damage
 
 
 static func get_damage_color(dtype: int) -> Color:

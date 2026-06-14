@@ -308,22 +308,7 @@ Replace the Epic 01 stub with the full implementation:
 
 ---
 
-## Task 04-11 — Fallback Wave Duration Timer
-
-**File**: `res://autoloads/WaveManager.gd`
-**Ref**: `mechanics.md` Section 3, `components.md` Constants (`WAVE_DURATION_MAX`)
-
-- [ ] Add a `_wave_fallback_timer: Timer` node.
-- [ ] Start `_wave_fallback_timer` with `Constants.WAVE_DURATION_MAX` (30.0) whenever `start_wave()` is called.
-- [ ] On timeout: if `_active_enemies.is_empty()`: do nothing (wave already cleared). Else:
-  - Force-kill all remaining enemies (call `ObjectPool.release()` on each, skip XP).
-  - Print warning: "Wave fallback triggered — enemies force-cleared."
-  - Emit `EventBus.wave_cleared(GameState.wave_number)`.
-- [ ] Stop and reset `_wave_fallback_timer` when wave clears normally.
-
----
-
-## Task 04-12 — Integration Test
+## Task 04-11 — Integration Test
 
 - [ ] Run the project.
 - [ ] Verify: waves 1–4 spawn only Grunts. Wave 5 starts spawning Runners. Wave 10 introduces Brutes.

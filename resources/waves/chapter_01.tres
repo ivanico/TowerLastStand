@@ -1,0 +1,193 @@
+[gd_resource type="Resource" script_class="ChapterConfig" load_steps=23 format=3 uid="uid://cjy282hk7pbj0"]
+
+[ext_resource type="Script" path="res://resources/waves/WaveConfig.gd" id="1_wave"]
+[ext_resource type="Script" path="res://resources/chapters/ChapterConfig.gd" id="2_chapter"]
+
+[sub_resource type="Resource" id="w1"]
+script = ExtResource("1_wave")
+wave_number = 1
+burst_count = 5
+trickle_count = 3
+trickle_interval = 4.0
+enemy_pool = Array[int]([0])
+is_boss_wave = false
+
+[sub_resource type="Resource" id="w2"]
+script = ExtResource("1_wave")
+wave_number = 2
+burst_count = 5
+trickle_count = 3
+trickle_interval = 4.0
+enemy_pool = Array[int]([0])
+is_boss_wave = false
+
+[sub_resource type="Resource" id="w3"]
+script = ExtResource("1_wave")
+wave_number = 3
+burst_count = 5
+trickle_count = 3
+trickle_interval = 4.0
+enemy_pool = Array[int]([0])
+is_boss_wave = false
+
+[sub_resource type="Resource" id="w4"]
+script = ExtResource("1_wave")
+wave_number = 4
+burst_count = 5
+trickle_count = 3
+trickle_interval = 4.0
+enemy_pool = Array[int]([0])
+is_boss_wave = false
+
+[sub_resource type="Resource" id="w5"]
+script = ExtResource("1_wave")
+wave_number = 5
+burst_count = 6
+trickle_count = 4
+trickle_interval = 3.5
+enemy_pool = Array[int]([0, 0, 0, 1])
+is_boss_wave = false
+
+[sub_resource type="Resource" id="w6"]
+script = ExtResource("1_wave")
+wave_number = 6
+burst_count = 6
+trickle_count = 4
+trickle_interval = 3.5
+enemy_pool = Array[int]([0, 0, 0, 1])
+is_boss_wave = false
+
+[sub_resource type="Resource" id="w7"]
+script = ExtResource("1_wave")
+wave_number = 7
+burst_count = 6
+trickle_count = 4
+trickle_interval = 3.5
+enemy_pool = Array[int]([0, 0, 0, 1])
+is_boss_wave = false
+
+[sub_resource type="Resource" id="w8"]
+script = ExtResource("1_wave")
+wave_number = 8
+burst_count = 6
+trickle_count = 4
+trickle_interval = 3.5
+enemy_pool = Array[int]([0, 0, 0, 1])
+is_boss_wave = false
+
+[sub_resource type="Resource" id="w9"]
+script = ExtResource("1_wave")
+wave_number = 9
+burst_count = 6
+trickle_count = 4
+trickle_interval = 3.5
+enemy_pool = Array[int]([0, 0, 0, 1])
+is_boss_wave = false
+
+[sub_resource type="Resource" id="w10"]
+script = ExtResource("1_wave")
+wave_number = 10
+burst_count = 7
+trickle_count = 4
+trickle_interval = 3.0
+enemy_pool = Array[int]([0, 0, 1, 1, 2])
+is_boss_wave = false
+
+[sub_resource type="Resource" id="w11"]
+script = ExtResource("1_wave")
+wave_number = 11
+burst_count = 7
+trickle_count = 4
+trickle_interval = 3.0
+enemy_pool = Array[int]([0, 0, 1, 1, 2])
+is_boss_wave = false
+
+[sub_resource type="Resource" id="w12"]
+script = ExtResource("1_wave")
+wave_number = 12
+burst_count = 7
+trickle_count = 4
+trickle_interval = 3.0
+enemy_pool = Array[int]([0, 0, 1, 1, 2])
+is_boss_wave = false
+
+[sub_resource type="Resource" id="w13"]
+script = ExtResource("1_wave")
+wave_number = 13
+burst_count = 7
+trickle_count = 4
+trickle_interval = 3.0
+enemy_pool = Array[int]([0, 0, 1, 1, 2])
+is_boss_wave = false
+
+[sub_resource type="Resource" id="w14"]
+script = ExtResource("1_wave")
+wave_number = 14
+burst_count = 7
+trickle_count = 4
+trickle_interval = 3.0
+enemy_pool = Array[int]([0, 0, 1, 1, 2])
+is_boss_wave = false
+
+[sub_resource type="Resource" id="w15"]
+script = ExtResource("1_wave")
+wave_number = 15
+burst_count = 8
+trickle_count = 5
+trickle_interval = 2.5
+enemy_pool = Array[int]([0, 0, 1, 1, 2, 3])
+is_boss_wave = false
+
+[sub_resource type="Resource" id="w16"]
+script = ExtResource("1_wave")
+wave_number = 16
+burst_count = 8
+trickle_count = 5
+trickle_interval = 2.5
+enemy_pool = Array[int]([0, 0, 1, 1, 2, 3])
+is_boss_wave = false
+
+[sub_resource type="Resource" id="w17"]
+script = ExtResource("1_wave")
+wave_number = 17
+burst_count = 8
+trickle_count = 5
+trickle_interval = 2.5
+enemy_pool = Array[int]([0, 0, 1, 1, 2, 3])
+is_boss_wave = false
+
+[sub_resource type="Resource" id="w18"]
+script = ExtResource("1_wave")
+wave_number = 18
+burst_count = 8
+trickle_count = 5
+trickle_interval = 2.5
+enemy_pool = Array[int]([0, 0, 1, 1, 2, 3])
+is_boss_wave = false
+
+[sub_resource type="Resource" id="w19"]
+script = ExtResource("1_wave")
+wave_number = 19
+burst_count = 8
+trickle_count = 5
+trickle_interval = 2.5
+enemy_pool = Array[int]([0, 0, 1, 1, 2, 3])
+is_boss_wave = false
+
+[sub_resource type="Resource" id="w20"]
+script = ExtResource("1_wave")
+wave_number = 20
+burst_count = 0
+trickle_count = 0
+trickle_interval = 1.0
+enemy_pool = Array[int]([])
+is_boss_wave = true
+
+[resource]
+script = ExtResource("2_chapter")
+chapter_id = 1
+chapter_name = "Plains"
+modifier_description = ""
+waves = Array[ExtResource("1_wave")]([SubResource("w1"), SubResource("w2"), SubResource("w3"), SubResource("w4"), SubResource("w5"), SubResource("w6"), SubResource("w7"), SubResource("w8"), SubResource("w9"), SubResource("w10"), SubResource("w11"), SubResource("w12"), SubResource("w13"), SubResource("w14"), SubResource("w15"), SubResource("w16"), SubResource("w17"), SubResource("w18"), SubResource("w19"), SubResource("w20")])
+material_type = 0
+chapter_mat_drop_range = Vector2i(8, 15)

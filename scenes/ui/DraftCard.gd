@@ -50,8 +50,6 @@ func setup(data: Resource) -> void:
 			$VBox/SynergyHint.visible = true
 			break
 
-	print("[DraftCard] setup: '", name_text, "'  rarity=", rarity,
-			" (0=Common grey  1=Rare blue  2=Epic purple)")
 
 
 func _on_select_button_pressed() -> void:

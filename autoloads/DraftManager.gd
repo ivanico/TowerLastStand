@@ -7,6 +7,8 @@ var _draft_trigger: String = "wave_clear"
 
 
 func open_draft(trigger: String = "wave_clear") -> void:
+	if GameState.phase == Constants.GamePhase.DRAFT:
+		return
 	_draft_trigger = trigger
 	GameState.phase = Constants.GamePhase.DRAFT
 	EventBus.phase_changed.emit(Constants.GamePhase.DRAFT)
@@ -17,7 +19,6 @@ func open_draft(trigger: String = "wave_clear") -> void:
 			names.append(card.spell_name)
 		elif card is StatUpgradeData:
 			names.append(card.upgrade_name)
-	print("DraftManager [%s]: %s" % [_draft_trigger, ", ".join(names)])
 	get_tree().paused = true
 	EventBus.draft_opened.emit()
 
@@ -110,7 +111,6 @@ func _is_excluded(card: Resource) -> bool:
 
 func select_card(card: Resource) -> void:
 	var picked_name: String = card.spell_name if card is SpellData else card.upgrade_name
-	print("DraftManager picked: ", picked_name)
 	GameState.apply_card(card)
 	_taken_cards.append(card)
 	GameState.phase = Constants.GamePhase.WAVE

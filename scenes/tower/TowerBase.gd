@@ -55,7 +55,6 @@ func _apply_passive_effect(spell: SpellData) -> void:
 		_reflect_percent = 0.10
 		if not EventBus.tower_damaged.is_connected(_on_tower_damaged):
 			EventBus.tower_damaged.connect(_on_tower_damaged)
-		print("[TowerBase] Passive applied: Mana Shield (10% reflect)")
 
 
 func _on_tower_damaged(amount: float) -> void:
@@ -70,8 +69,6 @@ func _on_tower_damaged(amount: float) -> void:
 func _on_card_selected(_card: Resource) -> void:
 	var effective_range := base_range + GameState.tower_range_bonus
 	($AttackRangeArea.get_node("CollisionShape2D").shape as CircleShape2D).radius = effective_range
-	print("[TowerBase] active_spells count: ", active_spells.size(),
-			"  AttackRange radius: ", effective_range)
 
 
 func _get_target(attack_range: float, _mode: int) -> Node:

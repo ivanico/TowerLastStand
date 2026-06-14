@@ -11,7 +11,7 @@ func _ready() -> void:
 	for res in _load_tres("res://resources/upgrades/"):
 		if res is StatUpgradeData:
 			all_stat_upgrades.append(res)
-	print("SpellRegistry: %d spells, %d stat upgrades loaded" % [all_spells.size(), all_stat_upgrades.size()])
+
 
 
 func get_spell(id: String) -> SpellData:

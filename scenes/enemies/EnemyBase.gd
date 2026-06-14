@@ -1,3 +1,4 @@
+class_name EnemyBase
 extends CharacterBody2D
 
 @export var base_hp: float         = 200.0
