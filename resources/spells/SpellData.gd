@@ -16,5 +16,6 @@ extends Resource
 @export var pierce_count: int = 0
 @export var chain_count: int = 0
 @export var projectile_scene: PackedScene
+@export var duration: float = 5.0
 @export var is_stackable: bool = false
 @export var stack_max: int = 1

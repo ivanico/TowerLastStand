@@ -22,6 +22,9 @@ func initialize(pos: Vector2, radius: float, spell: SpellData) -> void:
 
 
 func _apply_damage() -> void:
-	for body in get_overlapping_bodies():
-		if body.is_in_group("enemies") and body.has_method("take_damage"):
-			body.take_damage(damage, damage_type)
+	var radius := ($CollisionShape2D.shape as CircleShape2D).radius
+	for enemy in get_tree().get_nodes_in_group("enemies"):
+		if not is_instance_valid(enemy):
+			continue
+		if global_position.distance_to((enemy as Node2D).global_position) <= radius:
+			enemy.take_damage(damage, damage_type)

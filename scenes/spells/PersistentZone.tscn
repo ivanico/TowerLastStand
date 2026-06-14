@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://p0one0001"]
+
+[ext_resource type="Script" path="res://scenes/spells/PersistentZone.gd" id="1_pz"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pz"]
+radius = 140.0
+
+[node name="PersistentZone" type="Area2D"]
+collision_layer = 4
+collision_mask = 1
+script = ExtResource("1_pz")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_pz")
+
+[node name="TickTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = false
+autostart = false
+
+[node name="DurationTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = false

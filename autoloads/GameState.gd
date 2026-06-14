@@ -109,6 +109,7 @@ func add_tag(tag: int) -> void:
 func take_damage(amount: float) -> void:
 	tower_hp = max(0, tower_hp - int(amount))
 	hp_changed.emit(tower_hp, tower_max_hp)
+	EventBus.tower_damaged.emit(amount)
 	if tower_hp == 0:
 		EventBus.tower_died.emit()
 

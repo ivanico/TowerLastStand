@@ -1,8 +1,11 @@
 extends Node2D
 
-const _PROJECTILE_SCENE  := preload("res://scenes/spells/ProjectileBase.tscn")
-const _AOE_ZONE_SCENE    := preload("res://scenes/spells/AoEZone.tscn")
-const _ENEMY_GRUNT_SCENE := preload("res://scenes/enemies/EnemyGrunt.tscn")
+const _PROJECTILE_SCENE      := preload("res://scenes/spells/ProjectileBase.tscn")
+const _AOE_ZONE_SCENE        := preload("res://scenes/spells/AoEZone.tscn")
+const _PERSISTENT_ZONE_SCENE := preload("res://scenes/spells/PersistentZone.tscn")
+const _LAND_MINE_SCENE       := preload("res://scenes/spells/LandMine.tscn")
+const _ENEMY_GRUNT_SCENE     := preload("res://scenes/enemies/EnemyGrunt.tscn")
+const _DRAFT_UI_SCENE        := preload("res://scenes/ui/DraftUI.tscn")
 
 
 func _ready() -> void:
@@ -11,8 +14,11 @@ func _ready() -> void:
 	GameState.tower_node = $TowerNode
 	$TowerNode._projectile_container = $ProjectileContainer
 	$TowerNode._zone_container = $ZoneContainer
+	$TowerNode._mine_container = $MineContainer
 	ObjectPool.preload_pool(_PROJECTILE_SCENE, 30)
 	ObjectPool.preload_pool(_AOE_ZONE_SCENE, 10)
+	ObjectPool.preload_pool(_PERSISTENT_ZONE_SCENE, 10)
+	ObjectPool.preload_pool(_LAND_MINE_SCENE, 10)
 	ObjectPool.preload_pool(_ENEMY_GRUNT_SCENE, 30)
 	var test_spell := SpellData.new()
 	test_spell.spell_id       = "test_bolt"
@@ -25,6 +31,7 @@ func _ready() -> void:
 	test_spell.pierce_count   = 0
 	$TowerNode.add_spell(test_spell)
 
+	add_child(_DRAFT_UI_SCENE.instantiate())
 	GameState.start_run(null)
 	WaveManager.start_wave(GameState.wave_number)
 	EventBus.wave_cleared.connect(_on_wave_cleared)

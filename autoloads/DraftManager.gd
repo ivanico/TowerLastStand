@@ -18,11 +18,8 @@ func open_draft(trigger: String = "wave_clear") -> void:
 		elif card is StatUpgradeData:
 			names.append(card.upgrade_name)
 	print("DraftManager [%s]: %s" % [_draft_trigger, ", ".join(names)])
+	get_tree().paused = true
 	EventBus.draft_opened.emit()
-	# TODO 03-10: remove when DraftUI is built
-	await get_tree().create_timer(1.0).timeout
-	if GameState.phase == Constants.GamePhase.DRAFT and not _current_draft_cards.is_empty():
-		select_card(_current_draft_cards[0])
 
 
 func get_draft_cards() -> Array[Resource]:
@@ -112,9 +109,12 @@ func _is_excluded(card: Resource) -> bool:
 
 
 func select_card(card: Resource) -> void:
+	var picked_name: String = card.spell_name if card is SpellData else card.upgrade_name
+	print("DraftManager picked: ", picked_name)
 	GameState.apply_card(card)
 	_taken_cards.append(card)
 	GameState.phase = Constants.GamePhase.WAVE
+	get_tree().paused = false
 	EventBus.card_selected.emit(card)
 	EventBus.draft_closed.emit()
 	EventBus.phase_changed.emit(Constants.GamePhase.WAVE)

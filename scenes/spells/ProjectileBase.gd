@@ -5,10 +5,12 @@ var damage: float = 10.0
 var damage_type: int = Constants.DamageType.NORMAL
 var speed: float = 700.0
 var pierce_count: int = 0
+var chain_count: int = 0
 
 var _direction: Vector2 = Vector2.RIGHT
 var _hits: int = 0
 var _target: Node = null
+var _chained_targets: Array = []
 
 
 func _ready() -> void:
@@ -22,9 +24,11 @@ func _ready() -> void:
 func initialize(target: Node, spell: SpellData) -> void:
 	_target = target
 	_hits = 0
+	_chained_targets = []
 	damage = spell.damage * GameState.tower_damage_multiplier
 	damage_type = spell.damage_type
 	pierce_count = spell.pierce_count
+	chain_count = spell.chain_count
 	if is_instance_valid(target):
 		_direction = (target.global_position - global_position).normalized()
 	else:
@@ -37,12 +41,35 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
-	if not body.has_method("take_damage"):
+	if not body.is_in_group("enemies"):
 		return
 	body.take_damage(damage, damage_type)
+	_chained_targets.append(body)
 	_hits += 1
+	if chain_count > 0:
+		var next := _find_chain_target()
+		if next != null:
+			chain_count -= 1
+			_direction = (next.global_position - global_position).normalized()
+			rotation = _direction.angle()
+			return
 	if _hits > pierce_count:
 		ObjectPool.release(self)
+
+
+func _find_chain_target() -> Node:
+	var closest: Node = null
+	var closest_dist := INF
+	for enemy in get_tree().get_nodes_in_group("enemies"):
+		if not is_instance_valid(enemy):
+			continue
+		if enemy in _chained_targets:
+			continue
+		var dist := global_position.distance_to((enemy as Node2D).global_position)
+		if dist < 350.0 and dist < closest_dist:
+			closest_dist = dist
+			closest = enemy
+	return closest
 
 
 func _on_screen_exited() -> void:

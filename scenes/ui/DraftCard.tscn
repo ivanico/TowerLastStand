@@ -1,0 +1,43 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scenes/ui/DraftCard.gd" id="1_dc"]
+
+[node name="DraftCard" type="PanelContainer"]
+custom_minimum_size = Vector2(280, 380)
+script = ExtResource("1_dc")
+
+[node name="VBox" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="RarityBorder" type="ColorRect" parent="VBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 10)
+color = Color(0.55, 0.55, 0.55, 1)
+
+[node name="CardIcon" type="TextureRect" parent="VBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(64, 64)
+stretch_mode = 5
+
+[node name="CardName" type="Label" parent="VBox"]
+layout_mode = 2
+horizontal_alignment = 1
+text = "Card Name"
+
+[node name="TagContainer" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+
+[node name="Description" type="Label" parent="VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+autowrap_mode = 3
+text = ""
+
+[node name="SynergyHint" type="Label" parent="VBox"]
+layout_mode = 2
+visible = false
+text = "Completes [Tag]x3!"
+
+[node name="SelectButton" type="Button" parent="VBox"]
+layout_mode = 2
+text = "Choose"
