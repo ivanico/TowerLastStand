@@ -137,7 +137,9 @@ World Map
 
 ## Core Mechanics Summary
 
-**Tower**: Fixed at arena center. Auto-attacks. Chosen before run. 5 tower types at launch.
+**Tower**: Fixed at arena center. Auto-attacks. Chosen before run. 5 tower types at launch (1 starting, 4 unlocked via Blueprints earned from chapter completion). [ADDED: see Tower Unlocks in mechanics.md]
+
+**Chapters**: Target 4 chapters at launch — consistent with how similar mobile roguelites shipped initially (small complete set, expanded post-launch). 4 chapters also maps 1:1 to the 4 Blueprint unlocks. [ADDED]
 
 **Waves**: Kill-based (wave ends when all enemies dead, not on a timer). 20 waves per chapter. Enemies scale per wave.
 
@@ -196,13 +198,15 @@ World Map
 
 ## Towers Quick Reference
 
-| Tower | Passive | Star 3 Enhancement | Star 5 Second Passive |
-|-------|---------|-------------------|----------------------|
-| Ironclad | Every 5th shot fires 8-way | 8-way burst also applies slow | Gains 20% damage reduction |
-| Ember | Base attack applies Burn | Burn spreads on death | Every 10th shot detonates all Burn stacks |
-| Tide | Base attack bounces to 2nd enemy | Bounce hits a 3rd enemy | Chain synergies jump +1 extra always |
-| Sentinel | +50% base range | Long-range spells +15% dmg | Ignores 30% of all enemy armor |
-| Phantom | No base attack, spells +30% dmg | Spells gain +15% crit chance | One random spell fires twice per cooldown |
+[ADDED] Unlock column and complexity label added post-launch design. Base Attack column added — hidden from player until tower is crafted.
+
+| Tower | Complexity | Unlock | Base Attack | Passive | Star 3 Enhancement | Star 5 Second Passive |
+|-------|-----------|--------|-------------|---------|-------------------|----------------------|
+| Ironclad | Basic | Starting tower | Single Normal bolt | Every 5th shot fires 8-way | 8-way burst also applies slow | Gains 20% damage reduction |
+| Ember | Advanced | Chapter 1 Blueprint | Fire bolt (applies Burn) | Base attack applies Burn | Burn spreads on death | Every 10th shot detonates all Burn stacks |
+| Tide | Basic | Chapter 2 Blueprint | Bouncing Normal bolt | Base attack bounces to 2nd enemy | Bounce hits a 3rd enemy | Chain synergies jump +1 extra always |
+| Sentinel | Advanced | Chapter 3 Blueprint | Long Piercing bolt | +50% base range | Long-range spells +15% dmg | Ignores 30% of all enemy armor |
+| Phantom | Specialist | Chapter 4 Blueprint | No base attack | No base attack, spells +30% dmg | Spells gain +15% crit chance | One random spell fires twice per cooldown |
 
 ---
 

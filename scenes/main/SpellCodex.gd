@@ -197,6 +197,7 @@ func _refresh_detail(spell_id: String) -> void:
 	var spell := SpellRegistry.get_spell(spell_id)
 	if spell == null:
 		return
+	var ranked_spell := SpellRegistry.get_spell_for_run(spell_id)
 
 	var discovered := spell_id in MetaManager.discovered_spells
 	var rank       := MetaManager.get_spell_rank(spell_id)
@@ -213,14 +214,14 @@ func _refresh_detail(spell_id: String) -> void:
 
 	_detail_rank_label.text = "Rank %d   %s" % [rank, _rank_dots(rank)]
 
-	# Description: use field if present, otherwise derive from stats
+	# Description: use field if present, otherwise derive from ranked stats
 	var desc := spell.description
 	if desc == "" and discovered:
-		desc = "DMG: %.0f   CD: %.1fs   Range: %.0f" % [spell.damage, spell.cooldown, spell.range]
-		if spell.chain_count > 0:
-			desc += "   Chains: %d" % spell.chain_count
-		if spell.pierce_count > 0:
-			desc += "   Pierce: %d" % spell.pierce_count
+		desc = "DMG: %.0f   CD: %.2fs   Range: %.0f" % [ranked_spell.damage, ranked_spell.cooldown, ranked_spell.range]
+		if ranked_spell.chain_count > 0:
+			desc += "   Chains: %d" % ranked_spell.chain_count
+		if ranked_spell.pierce_count > 0:
+			desc += "   Pierce: %d" % ranked_spell.pierce_count
 	_detail_desc_label.text = desc if discovered else ""
 
 	_detail_mats_label.text  = "Materials: %d Chapter / %d Universal" % [ch_mats, un_mats]

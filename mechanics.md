@@ -249,6 +249,11 @@ Non-spell cards that directly boost tower stats. Examples:
 - Chapters unlock sequentially — complete chapter N to unlock chapter N+1.
 - Any previously completed chapter can be replayed for materials (with diminishing returns).
 
+### Launch Chapter Scope [ADDED]
+- Target: **4 chapters at launch**. This is consistent with how similar mobile roguelites (e.g. Archero) shipped their initial content — a small but complete chapter set, expanded post-launch via updates.
+- 4 chapters maps cleanly to the tower unlock system: one Blueprint per chapter completion means the player earns all 4 non-Ironclad towers by the time they finish the launch content.
+- Exact chapter count subject to change during balance testing — this is the current target, not a hard constraint.
+
 ### Chapter Modifiers [v1.1]
 Each chapter has a passive environmental modifier active for the entire run:
 - *Chapter 1 (Plains)*: no modifier.
@@ -273,10 +278,26 @@ Each chapter has a passive environmental modifier active for the entire run:
 - Star 5: unlocks second passive.
 - Stars improve base stats (HP, damage, range) by a fixed % per star.
 
-### Tower Unlocks [v1.1]
-- Towers are unlocked by reaching material milestones or completing specific chapters.
-- Starting roster: 2 towers available. Full roster: 8–10 towers at launch.
+### Tower Unlocks [ADDED — post-launch design, replaces v1.1 stub]
+- Starting roster: Ironclad only. Additional towers are locked and must be crafted.
+- Locked towers are visible in the Tower Garage but their stats, passive, and base attack are fully hidden. Only the tower's name and silhouette are shown.
+- Each locked tower shows a "How to Unlock" hint in place of stats (e.g. "Complete Chapter 2 to earn the Blueprint").
+- **Blueprint System**: completing a chapter drops a Tower Blueprint for the next locked tower. Pacing (every chapter vs every 2 chapters) to be tuned during balance testing.
+- Blueprints are crafted in the Tower Garage to permanently add the tower to your roster. No other cost beyond the Blueprint itself.
+- Once crafted, the tower can be star-upgraded normally with Chapter Materials.
 - New towers are never strictly better — they offer different playstyles.
+- No rarity system on towers. Towers use a **complexity label** instead (Basic / Advanced / Specialist) to signal how difficult they are to pilot, not how powerful they are.
+  - Basic: Ironclad, Tide (straightforward stats and passives)
+  - Advanced: Ember, Sentinel (synergy-dependent, skill rewarded)
+  - Specialist: Phantom (no base attack — relies entirely on drafted spells)
+
+### Tower Base Attacks per Tower [ADDED]
+Each tower has a unique starting base attack that is baked in and cannot be removed or drafted. It is revealed only after the tower is crafted:
+- **Ironclad**: single Normal bolt — fires one projectile at nearest enemy.
+- **Ember**: Fire bolt — single Chaos/Magic projectile that applies Burn on hit.
+- **Tide**: Bouncing bolt — Normal projectile that bounces to a second nearby enemy.
+- **Sentinel**: Long bolt — single Piercing projectile with extended range.
+- **Phantom**: No base attack — compensated by all drafted spells dealing +30% damage.
 
 ### Spell Ranks [v1.1]
 - Each of the 25 spells has ranks 1–5, upgraded with materials.
@@ -307,10 +328,10 @@ Material storage shown in the Tower Garage between runs.
 - Used for: extra energy, cosmetic tower skins, occasional material bundles.
 - Never directly purchases stat power.
 
-### Tower Packs [v1.1]
-- New towers earnable through chapter progression.
-- Some towers available to buy directly with premium currency (time-saving, not power).
-- All towers earnable free with enough play.
+### Tower Packs [ADDED — replaces v1.1 stub]
+- New towers are earned through chapter progression via the Blueprint system (see Meta Progression section).
+- Premium currency can skip the Blueprint grind (buy the Blueprint directly) but cannot bypass the crafting step or the chapter requirement gate — this prevents new players from buying power they can't use.
+- All towers are earnable free with enough play. Premium only saves time.
 
 ### Cosmetics [v1.1]
 - Tower skins: change idle animation, projectile visuals, impact VFX, death animation.
@@ -359,11 +380,12 @@ Material storage shown in the Tower Garage between runs.
 - "Try Again" button restarts chapter from wave 1.
 - "Return to Map" button goes back to world map.
 
-### Tower Garage (Meta UI) [MVP]
-- Shows all owned towers with current star level.
-- Tap tower to view stats, passive description, upgrade cost.
+### Tower Garage (Meta UI) [MVP + ADDED]
+- Shows ALL towers (owned and locked) in a single scrollable list.
+- **Owned towers**: show current star level, stats, passive description, upgrade cost, and a Select button.
+- **Locked towers** [ADDED]: shown as a silhouette with name and complexity label visible. Stats, passive, and base attack are fully hidden. Shows "How to Unlock" text in place of stats (e.g. "Complete Chapter 2 to receive the Blueprint"). If player has the Blueprint in hand, shows a "Craft Tower" button instead.
 - Upgrade button (greyed if insufficient materials).
-- Select button to bring tower into next run.
+- Select button to bring an owned tower into next run.
 
 ### Spell Codex (Meta UI) [v1.1]
 - Shows all 25 spells with lock/unlock state, current rank, rank-up preview.
