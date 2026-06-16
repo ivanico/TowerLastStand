@@ -6,6 +6,13 @@ var _current_draft_cards: Array[Resource]
 var _draft_trigger: String = "wave_clear"
 
 
+func reset_run() -> void:
+	_card_pool             = []
+	_taken_cards           = []
+	_current_draft_cards   = []
+	_draft_trigger         = "wave_clear"
+
+
 func open_draft(trigger: String = "wave_clear") -> void:
 	if GameState.phase == Constants.GamePhase.DRAFT:
 		return
@@ -57,6 +64,9 @@ func get_draft_cards() -> Array[Resource]:
 						break
 			if not tagged.is_empty():
 				drawn[drawn.size() - 1] = tagged[randi() % tagged.size()]
+	for i in drawn.size():
+		if drawn[i] is SpellData:
+			drawn[i] = SpellRegistry.get_spell_for_run((drawn[i] as SpellData).spell_id)
 	return drawn
 
 

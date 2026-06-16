@@ -14,7 +14,7 @@ func _ready() -> void:
 
 func initialize(pos: Vector2, radius: float, spell: SpellData) -> void:
 	global_position = pos
-	damage = spell.damage * GameState.tower_damage_multiplier
+	damage = spell.damage  # tower_damage_multiplier applied in CombatUtils
 	damage_type = spell.damage_type
 	($CollisionShape2D.shape as CircleShape2D).radius = radius
 	_apply_damage.call_deferred()

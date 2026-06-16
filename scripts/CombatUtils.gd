@@ -34,20 +34,21 @@ static var DAMAGE_TABLE: Dictionary = {
 }
 
 
-static func calculate_damage(base: float, dtype: int, atype: int) -> float:
+static func calculate_damage(base: float, dtype: int, atype: int, target_hp_ratio: float = 1.0) -> float:
 	var multiplier: float = DAMAGE_TABLE[dtype][atype]
-	var damage := base * multiplier
+	var damage := base * multiplier * GameState.tower_damage_multiplier
 
 	match dtype:
 		Constants.DamageType.MAGIC:
 			damage *= GameState.fire_damage_bonus
 		Constants.DamageType.SIEGE:
-			damage *= GameState.siege_vs_high_hp_bonus
+			# Heavy×3 bonus only applies to enemies above 50% HP
+			if target_hp_ratio > 0.5:
+				damage *= GameState.siege_vs_high_hp_bonus
 		Constants.DamageType.CHAOS:
 			if GameState.chaos_extra_armor_ignore > 0.0:
-				damage += base * GameState.chaos_extra_armor_ignore
+				damage += base * GameState.tower_damage_multiplier * GameState.chaos_extra_armor_ignore
 
-	damage *= GameState.tower_damage_multiplier
 	return damage
 
 

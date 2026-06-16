@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="TowerData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://resources/towers/TowerData.gd" id="1_aaaaa"]
+
+[resource]
+script = ExtResource("1_aaaaa")
+tower_id = 0
+tower_name = "Ironclad"
+description = "A heavily armoured tower. Every 5th shot fires in all 8 directions."
+base_hp = 2000
+base_damage = 50.0
+base_fire_rate = 1.0
+base_range = 450.0
+base_armor = 0
+base_attack_type = 0
+star_hp_bonus = Array[int]([200, 300, 400, 500])
+star_damage_bonus = Array[float]([0.05, 0.08, 0.1, 0.15])
+passive_description = "Every 5th shot fires in all 8 directions."
+passive_star3_description = "8-way burst also applies slow."
+passive_star5_description = "Gains 20% damage reduction."

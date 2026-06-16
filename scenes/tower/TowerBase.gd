@@ -14,6 +14,10 @@ var _zone_container: Node
 var _mine_container: Node
 var _reflect_percent: float = 0.0
 
+# Built-in base attack — always active, replaced by TowerData values in Task 05-04
+var _base_spell: SpellData
+var _base_timer: float = 0.0
+
 
 func _ready() -> void:
 	add_to_group("tower")
@@ -28,14 +32,41 @@ func _ready() -> void:
 		_enemies_in_range.erase(enemy))
 	base_range = ($AttackRangeArea.get_node("CollisionShape2D").shape as CircleShape2D).radius
 	EventBus.card_selected.connect(_on_card_selected)
+	_base_spell = SpellData.new()
+	_base_spell.spell_id       = "_base_attack"
+	_base_spell.spell_name     = "Base Attack"
+	_base_spell.damage         = 50.0
+	_base_spell.damage_type    = Constants.DamageType.NORMAL
+	_base_spell.spell_category = Constants.SpellCategory.PROJECTILE
+	_base_spell.cooldown       = 1.0
+	_base_spell.range          = 450.0
+	_base_spell.pierce_count   = 0
+	# Overridden by setup_from_data() once GameWorld passes real TowerData
 
 
 func _physics_process(delta: float) -> void:
+	_base_timer -= delta
+	if _base_timer <= 0.0:
+		_base_timer = _base_spell.cooldown * GameState.tower_fire_rate_multiplier
+		_fire_projectile(_base_spell)
 	for spell in active_spells:
 		_spell_cooldowns[spell.spell_id] -= delta
 		if _spell_cooldowns[spell.spell_id] <= 0.0:
 			_spell_cooldowns[spell.spell_id] = spell.cooldown * GameState.tower_fire_rate_multiplier
 			_fire_spell(spell)
+
+
+func setup_from_data(tower_data: TowerData) -> void:
+	_base_spell.damage      = tower_data.base_damage
+	_base_spell.damage_type = tower_data.base_attack_type
+	_base_spell.cooldown    = tower_data.base_fire_rate
+	_base_spell.range       = tower_data.base_range
+	base_range              = tower_data.base_range
+	($AttackRangeArea.get_node("CollisionShape2D").shape as CircleShape2D).radius = tower_data.base_range
+	_base_timer = 0.0
+	print("[TowerBase] Setup from data — damage=%.0f, type=%d, cooldown=%.2fs, range=%.0f" % [
+		_base_spell.damage, _base_spell.damage_type, _base_spell.cooldown, _base_spell.range
+	])
 
 
 func take_damage(amount: float) -> void:

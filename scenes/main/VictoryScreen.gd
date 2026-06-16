@@ -1,7 +1,16 @@
 extends CanvasLayer
 
+var _chap_mats: int = 0
+var _univ_mats: int = 0
+var _awarded: bool  = false
+
 
 func _ready() -> void:
+	_chap_mats = int(randi_range(8, 15) * GameState.materials_bonus_multiplier)
+	if GameState.perfect_run and GameState.bonus_cache_on_perfect_run:
+		_chap_mats += 5
+	_univ_mats = randi_range(1, 3)
+
 	var bg := ColorRect.new()
 	bg.anchor_right  = 1.0
 	bg.anchor_bottom = 1.0
@@ -26,13 +35,11 @@ func _ready() -> void:
 	panel.add_theme_constant_override("separation", 24)
 	add_child(panel)
 
-	var chap_mats := randi_range(5, 15)
-	var univ_mats := int(chap_mats * 0.2)
 	for text in [
 		"Waves Cleared: %d / %d"   % [Constants.TOTAL_WAVES, Constants.TOTAL_WAVES],
 		"Enemies Killed: %d"        % GameState.total_kills,
 		"Synergies Achieved: %d"    % GameState.active_synergies.size(),
-		"Chapter Materials: +%d   Universal Materials: +%d" % [chap_mats, univ_mats],
+		"Chapter Materials: +%d   Universal Materials: +%d" % [_chap_mats, _univ_mats],
 	]:
 		var lbl := Label.new()
 		lbl.text = text
@@ -51,5 +58,24 @@ func _ready() -> void:
 	add_child(btn)
 
 
+
+
+func _award_materials() -> void:
+	if _awarded:
+		return
+	_awarded = true
+	print("[VictoryScreen] perfect_run=%s, bonus_flag=%s, chap_mats=%d, univ_mats=%d" % [
+		GameState.perfect_run, GameState.bonus_cache_on_perfect_run, _chap_mats, _univ_mats
+	])
+	MetaManager.add_materials(Constants.MaterialType.CHAPTER_MAT, _chap_mats)
+	if _univ_mats > 0:
+		MetaManager.add_materials(Constants.MaterialType.UNIVERSAL_MAT, _univ_mats)
+	print("[VictoryScreen] Materials after award — chapter=%d, universal=%d" % [
+		MetaManager.materials.get(Constants.MaterialType.CHAPTER_MAT, 0),
+		MetaManager.materials.get(Constants.MaterialType.UNIVERSAL_MAT, 0)
+	])
+
+
 func _on_continue() -> void:
-	get_tree().change_scene_to_file("res://scenes/main/GameWorld.tscn")
+	_award_materials()
+	get_tree().change_scene_to_file("res://scenes/main/WorldMap.tscn")

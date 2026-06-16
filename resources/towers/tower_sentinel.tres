@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="TowerData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://resources/towers/TowerData.gd" id="1_aaaaa"]
+
+[resource]
+script = ExtResource("1_aaaaa")
+tower_id = 3
+tower_name = "Sentinel"
+description = "A long-range tower with +50% base range."
+base_hp = 1700
+base_damage = 55.0
+base_fire_rate = 1.3
+base_range = 675.0
+base_armor = 0
+base_attack_type = 1
+star_hp_bonus = Array[int]([170, 255, 340, 425])
+star_damage_bonus = Array[float]([0.06, 0.09, 0.12, 0.17])
+passive_description = "+50% base range. Long-range spells deal +15% damage."
+passive_star3_description = "Long-range spells +15% damage."
+passive_star5_description = "Ignores 30% of all enemy armor."

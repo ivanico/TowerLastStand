@@ -14,6 +14,28 @@ func _ready() -> void:
 
 
 
+func get_spell_for_run(spell_id: String) -> SpellData:
+	var base := get_spell(spell_id)
+	if base == null:
+		return null
+	var rank := MetaManager.get_spell_rank(spell_id)
+	if rank <= 1:
+		return base
+	var s := base.duplicate() as SpellData
+	if rank >= 2:
+		s.damage   *= 1.15
+		s.cooldown *= 0.95
+	if rank >= 3:
+		s.pierce_count += 1
+	if rank >= 4:
+		s.damage   *= 1.20
+		s.cooldown *= 0.90
+	if rank >= 5:
+		s.pierce_count += 1
+		s.chain_count  += 1
+	return s
+
+
 func get_spell(id: String) -> SpellData:
 	for spell in all_spells:
 		if spell.spell_id == id:

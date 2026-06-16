@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scenes/main/SpellCodex.gd" id="1_SpellCodex"]
+
+[node name="SpellCodex" type="CanvasLayer"]
+script = ExtResource("1_SpellCodex")

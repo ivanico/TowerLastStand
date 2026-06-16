@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="TowerData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://resources/towers/TowerData.gd" id="1_aaaaa"]
+
+[resource]
+script = ExtResource("1_aaaaa")
+tower_id = 1
+tower_name = "Ember"
+description = "A fire tower. Base attack applies Burn (1-sec DoT)."
+base_hp = 1600
+base_damage = 40.0
+base_fire_rate = 0.8
+base_range = 400.0
+base_armor = 0
+base_attack_type = 2
+star_hp_bonus = Array[int]([160, 240, 320, 400])
+star_damage_bonus = Array[float]([0.06, 0.09, 0.12, 0.18])
+passive_description = "Base attack applies Burn (1-sec DoT)."
+passive_star3_description = "Burn spreads to adjacent enemies on death."
+passive_star5_description = "Every 10th shot detonates all active Burn stacks."

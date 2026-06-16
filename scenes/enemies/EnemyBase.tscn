@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://ci4vu4utkcq7y"]
 
-[ext_resource type="Script" path="res://scenes/enemies/EnemyBase.gd" id="1_ebase"]
+[ext_resource type="Script" uid="uid://dv0wqmnne4yc7" path="res://scenes/enemies/EnemyBase.gd" id="1_ebase"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_001"]
 radius = 20.0
@@ -13,9 +13,6 @@ radius = 35.0
 radius = 55.0
 
 [node name="EnemyBase" type="CharacterBody2D"]
-groups = ["enemies"]
-collision_layer = 1
-collision_mask = 1
 motion_mode = 1
 script = ExtResource("1_ebase")
 

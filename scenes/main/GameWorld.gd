@@ -6,7 +6,15 @@ const _PERSISTENT_ZONE_SCENE := preload("res://scenes/spells/PersistentZone.tscn
 const _LAND_MINE_SCENE       := preload("res://scenes/spells/LandMine.tscn")
 const _DRAFT_UI_SCENE        := preload("res://scenes/ui/DraftUI.tscn")
 const _SYNERGY_BANNER_SCENE  := preload("res://scenes/ui/SynergyBanner.tscn")
-const _CHAPTER_01            := preload("res://resources/waves/chapter_01.tres")
+const _CHAPTER_01 := preload("res://resources/waves/chapter_01.tres")
+
+const _TOWER_DATA_PATHS := {
+	Constants.TowerID.IRONCLAD: "res://resources/towers/tower_ironclad.tres",
+	Constants.TowerID.EMBER:    "res://resources/towers/tower_ember.tres",
+	Constants.TowerID.TIDE:     "res://resources/towers/tower_tide.tres",
+	Constants.TowerID.SENTINEL: "res://resources/towers/tower_sentinel.tres",
+	Constants.TowerID.PHANTOM:  "res://resources/towers/tower_phantom.tres",
+}
 
 
 func _ready() -> void:
@@ -19,20 +27,14 @@ func _ready() -> void:
 	ObjectPool.preload_pool(_AOE_ZONE_SCENE, 10)
 	ObjectPool.preload_pool(_PERSISTENT_ZONE_SCENE, 10)
 	ObjectPool.preload_pool(_LAND_MINE_SCENE, 10)
-	var test_spell := SpellData.new()
-	test_spell.spell_id       = "test_bolt"
-	test_spell.spell_name     = "Test Bolt"
-	test_spell.damage         = 50.0
-	test_spell.damage_type    = Constants.DamageType.NORMAL
-	test_spell.spell_category = Constants.SpellCategory.PROJECTILE
-	test_spell.cooldown       = 1.0
-	test_spell.range          = 450.0
-	test_spell.pierce_count   = 0
-	$TowerNode.add_spell(test_spell)
-
 	add_child(_SYNERGY_BANNER_SCENE.instantiate())
 	add_child(_DRAFT_UI_SCENE.instantiate())
-	GameState.start_run(null)
+	var tower_id  := MetaManager.selected_tower_id
+	var data_path: String = _TOWER_DATA_PATHS.get(tower_id, _TOWER_DATA_PATHS[Constants.TowerID.IRONCLAD])
+	var tower_data := ResourceLoader.load(data_path) as TowerData
+	DraftManager.reset_run()
+	GameState.start_run(tower_data)
+	$TowerNode.setup_from_data(tower_data)
 	WaveManager.start_wave(GameState.wave_number)
 	EventBus.wave_cleared.connect(_on_wave_cleared)
 	EventBus.phase_changed.connect(_on_phase_changed)

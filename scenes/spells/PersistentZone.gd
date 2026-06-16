@@ -3,6 +3,7 @@ extends Area2D
 
 var damage: float = 0.0
 var damage_type: int = Constants.DamageType.NORMAL
+var _active: bool = false
 
 
 func _ready() -> void:
@@ -14,10 +15,11 @@ func _ready() -> void:
 
 
 func initialize(pos: Vector2, radius: float, spell: SpellData) -> void:
+	_active = true
 	$TickTimer.stop()
 	$DurationTimer.stop()
 	global_position = pos
-	damage = spell.damage * GameState.tower_damage_multiplier
+	damage = spell.damage  # tower_damage_multiplier applied in CombatUtils
 	damage_type = spell.damage_type
 	($CollisionShape2D.shape as CircleShape2D).radius = radius
 	$TickTimer.start()
@@ -25,11 +27,16 @@ func initialize(pos: Vector2, radius: float, spell: SpellData) -> void:
 
 
 func _on_tick_timer_timeout() -> void:
+	if not _active:
+		return
 	for body in get_overlapping_bodies():
 		if body.is_in_group("enemies"):
 			body.take_damage(damage, damage_type)
 
 
 func _on_duration_timer_timeout() -> void:
+	if not _active:
+		return
+	_active = false
 	$TickTimer.stop()
 	ObjectPool.release(self)

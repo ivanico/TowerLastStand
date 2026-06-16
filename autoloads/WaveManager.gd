@@ -27,11 +27,6 @@ func _ready() -> void:
 	_trickle_timer.timeout.connect(_on_trickle_timer_timeout)
 	add_child(_trickle_timer)
 	EventBus.enemy_died.connect(_on_enemy_died)
-	var chapter := load("res://resources/waves/chapter_01.tres") as ChapterConfig
-	if chapter != null:
-		print("chapter_01.tres OK — %d waves" % chapter.waves.size())
-	else:
-		push_error("chapter_01.tres failed to load")
 
 
 func setup(enemy_container: Node, tower: Node, chapter: ChapterConfig) -> void:

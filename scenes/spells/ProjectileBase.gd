@@ -11,6 +11,7 @@ var _direction: Vector2 = Vector2.RIGHT
 var _hits: int = 0
 var _target: Node = null
 var _chained_targets: Array = []
+var _active: bool = false
 
 
 func _ready() -> void:
@@ -22,13 +23,14 @@ func _ready() -> void:
 
 
 func initialize(target: Node, spell: SpellData) -> void:
+	_active = true
 	_target = target
 	_hits = 0
 	_chained_targets = []
-	damage = spell.damage * GameState.tower_damage_multiplier
+	damage      = spell.damage  # tower_damage_multiplier applied once in CombatUtils
 	damage_type = spell.damage_type
-	pierce_count = spell.pierce_count
-	chain_count = spell.chain_count
+	pierce_count = spell.pierce_count + GameState.global_pierce_bonus
+	chain_count  = spell.chain_count  + GameState.global_chain_bonus
 	if is_instance_valid(target):
 		_direction = (target.global_position - global_position).normalized()
 	else:
@@ -41,6 +43,8 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
+	if not _active:
+		return
 	if not body.is_in_group("enemies"):
 		return
 	body.take_damage(damage, damage_type)
@@ -54,7 +58,7 @@ func _on_body_entered(body: Node2D) -> void:
 			rotation = _direction.angle()
 			return
 	if _hits > pierce_count:
-		ObjectPool.release(self)
+		_release()
 
 
 func _find_chain_target() -> Node:
@@ -63,14 +67,23 @@ func _find_chain_target() -> Node:
 	for enemy in get_tree().get_nodes_in_group("enemies"):
 		if not is_instance_valid(enemy):
 			continue
+		if not (enemy as Node2D).visible:
+			continue
 		if enemy in _chained_targets:
 			continue
 		var dist := global_position.distance_to((enemy as Node2D).global_position)
-		if dist < 350.0 and dist < closest_dist:
+		if dist < 500.0 and dist < closest_dist:
 			closest_dist = dist
 			closest = enemy
 	return closest
 
 
 func _on_screen_exited() -> void:
+	_release()
+
+
+func _release() -> void:
+	if not _active:
+		return
+	_active = false
 	ObjectPool.release(self)

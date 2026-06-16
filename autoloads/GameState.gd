@@ -52,6 +52,7 @@ var materials_bonus_multiplier: float = 1.0
 var bonus_cache_on_perfect_run: bool  = false
 var chaos_extra_armor_ignore: float = 0.0
 var chaos_insta_kill_chance: float  = 0.0
+var perfect_run: bool = true
 
 var _armor_regen_timer: Timer
 
@@ -68,15 +69,25 @@ func _ready() -> void:
 	EventBus.wave_cleared.connect(func(_w: int) -> void: waves_cleared += 1)
 
 
-func start_run(tower_data) -> void:
+func start_run(tower_data: TowerData) -> void:
 	reset()
 	if tower_data != null:
+		var star := MetaManager.get_tower_star(MetaManager.selected_tower_id)
 		tower_max_hp = tower_data.base_hp
-		tower_armor  = tower_data.base_armor
+		for i in range(star - 1):
+			tower_max_hp += tower_data.star_hp_bonus[i]
+		tower_damage_multiplier = 1.0
+		for i in range(star - 1):
+			tower_damage_multiplier += tower_data.star_damage_bonus[i]
+		tower_armor = tower_data.base_armor
+		print("[GameState] Run started — tower=%s, star=%d, hp=%d, dmg_mult=%.2f" % [
+			tower_data.tower_name, star, tower_max_hp, tower_damage_multiplier
+		])
 	else:
-		tower_max_hp = 1000
-		tower_armor  = 0
-	tower_hp = tower_max_hp
+		tower_max_hp = 2000
+		print("[GameState] Run started — no TowerData, using defaults (hp=2000)")
+	tower_hp  = tower_max_hp
+	perfect_run = true
 	phase = Constants.GamePhase.WAVE
 	EventBus.phase_changed.emit(phase)
 	hp_changed.emit(tower_hp, tower_max_hp)
@@ -84,6 +95,13 @@ func start_run(tower_data) -> void:
 
 func end_run(victory: bool) -> void:
 	phase = Constants.GamePhase.VICTORY if victory else Constants.GamePhase.DEFEAT
+	var reached: int = Constants.TOTAL_WAVES if victory else wave_number
+	var chapter_id := 1  # hardcoded until Task 05-10 wires multi-chapter selection
+	var current_best: int = MetaManager.best_wave_per_chapter.get(chapter_id, 0)
+	if reached > current_best:
+		MetaManager.best_wave_per_chapter[chapter_id] = reached
+		MetaManager.save()
+		print("[GameState] Best wave updated — chapter=%d, wave=%d" % [chapter_id, reached])
 	EventBus.run_ended.emit(victory, wave_number)
 
 
@@ -104,6 +122,7 @@ func apply_card(card: Resource) -> void:
 			active_spells.append(card)
 			for tag in card.tags:
 				add_tag(tag)
+			MetaManager.discover_spell(card.spell_id)
 			if tower_node != null:
 				tower_node.add_spell(card)
 	elif card is StatUpgradeData:
@@ -136,6 +155,8 @@ func add_tag(tag: int) -> void:
 func take_damage(amount: float) -> void:
 	var effective := amount * (1.0 - damage_reduction)
 	tower_hp = max(0, tower_hp - int(effective))
+	if tower_hp < tower_max_hp:
+		perfect_run = false
 	hp_changed.emit(tower_hp, tower_max_hp)
 	EventBus.tower_damaged.emit(amount)
 	if tower_hp == 0:

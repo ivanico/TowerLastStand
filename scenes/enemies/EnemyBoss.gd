@@ -53,7 +53,8 @@ func _physics_process(delta: float) -> void:
 func take_damage(amount: float, damage_type: int) -> void:
 	if _is_dead or _is_transitioning:
 		return
-	var actual := CombatUtils.calculate_damage(amount, damage_type, Constants.ArmorType.UNARMORED)
+	var hp_ratio := hp / max_hp if max_hp > 0.0 else 1.0
+	var actual := CombatUtils.calculate_damage(amount, damage_type, Constants.ArmorType.UNARMORED, hp_ratio)
 	hp -= actual
 	$HPBar.value = (hp / max_hp) * 100.0
 	if hp <= 0.0:

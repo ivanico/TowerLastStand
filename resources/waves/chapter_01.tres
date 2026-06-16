@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ChapterConfig" load_steps=23 format=3 uid="uid://cjy282hk7pbj0"]
 
-[ext_resource type="Script" path="res://resources/waves/WaveConfig.gd" id="1_wave"]
-[ext_resource type="Script" path="res://resources/chapters/ChapterConfig.gd" id="2_chapter"]
+[ext_resource type="Script" uid="uid://dv4vsc1oiwa2d" path="res://resources/waves/WaveConfig.gd" id="1_wave"]
+[ext_resource type="Script" uid="uid://ckltgv7mpqy4o" path="res://resources/chapters/ChapterConfig.gd" id="2_chapter"]
 
 [sub_resource type="Resource" id="w1"]
 script = ExtResource("1_wave")

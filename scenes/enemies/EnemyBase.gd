@@ -76,12 +76,13 @@ func _apply_separation(delta: float) -> Vector2:
 func take_damage(amount: float, damage_type: int) -> void:
 	if _is_dead:
 		return
-	var actual := CombatUtils.calculate_damage(amount, damage_type, armor_type)
+	var hp_ratio := hp / _max_hp if _max_hp > 0.0 else 1.0
+	var actual := CombatUtils.calculate_damage(amount, damage_type, armor_type, hp_ratio)
 	hp -= actual
 	$HPBar.visible = true
 	$HPBar.value   = (hp / _max_hp) * 100.0
 	if hp <= 0.0:
-		die()
+		die(damage_type)
 
 
 func reset() -> void:
@@ -94,9 +95,11 @@ func reset() -> void:
 	velocity = Vector2.ZERO
 	$HPBar.visible = false
 	$HPBar.value = 100.0
+	for child in find_children("*", "CollisionShape2D", true, false):
+		child.set_deferred("disabled", false)
 
 
-func die() -> void:
+func die(killing_damage_type: int = Constants.DamageType.NORMAL) -> void:
 	_is_attacking = false
 	_tower_ref    = null
 	if _is_dead:
@@ -104,6 +107,8 @@ func die() -> void:
 	_is_dead = true
 	for child in find_children("*", "CollisionShape2D", true, false):
 		child.set_deferred("disabled", true)
+	if killing_damage_type == Constants.DamageType.PIERCING and GameState.pierce_heals_on_kill:
+		GameState.heal(GameState.tower_max_hp * 0.005)
 	EventBus.enemy_died.emit(self, global_position)
 	EventBus.xp_gained.emit(xp_value)
 	ObjectPool.release(self)
